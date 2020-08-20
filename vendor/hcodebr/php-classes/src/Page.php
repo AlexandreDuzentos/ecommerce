@@ -10,6 +10,8 @@
  	private $options;
  	private $defaults = [
          "data"=>[],
+         "header"=>true,
+         "footer"=>true,
  	];
 
 //Cabeçario do ecommerce
@@ -32,7 +34,7 @@
 
 	 	$this->tpl = new Tpl();
 
-	 	$this->tpl->draw("header");
+	 	if($this->options[ "header"] === true)$this->tpl->draw("header");
    }
    //Final do Cabeçario
 
@@ -62,7 +64,7 @@
     //Footer do ecommerce
    public function __destruct(){
 
-     $this->tpl->draw("footer");
+    if($this->options["footer"] === true) $this->tpl->draw("footer");
      
    }
    //Final do footer
