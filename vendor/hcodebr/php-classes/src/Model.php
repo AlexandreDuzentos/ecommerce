@@ -16,11 +16,11 @@ class Model {
 		{
 
 			case "get":
-				return $this->values[$fieldName];
+				return isset($this->values[$fieldName]) ? $this->values[$fieldName] : NULL;
 			break;
 
 			case "set":
-				$this->values[$fieldName] = $args[0];
+				$this->values[$fieldName] = $args[0]; //OS valores passados como paramêtros nos setters são passados como argumento nesse metodo
 			break;
 
 		}
@@ -37,6 +37,7 @@ class Model {
 		}
 
 	}
+
 
 	public function getValues()
 	{
