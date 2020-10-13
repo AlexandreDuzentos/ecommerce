@@ -41,7 +41,8 @@ class User extends Model {
 		    return $user;
 
 		} else {
-			throw new \Exception("Usuário inexistente ou senha inválida");
+			
+      throw new \Exception("Usuário inexistente ou senha inválida");
 		}
 
 	}
