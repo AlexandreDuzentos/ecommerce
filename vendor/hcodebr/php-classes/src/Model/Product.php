@@ -140,7 +140,10 @@ public function save()
 
      $rows =  $sql->select("SELECT * FROM tb_products WHERE desurl = :desurl",array(
          ":desurl"=>$desurl,
+
+         
       ));
+      //$this->checkList($rows);
       $this->setData($rows[0]);
    }
 

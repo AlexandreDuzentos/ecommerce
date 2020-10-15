@@ -2,8 +2,9 @@
 
 use \Hcode\Page;
 use \Hcode\Model\Product;
-use \Hcode\Model\User;
 use \Hcode\Model\Category;
+use \Hcode\Model\Cart;
+
 //Rota para a home page
 $app->get('/', function() {
 
@@ -22,7 +23,6 @@ $app->get('/categories/:idcategory',function($idcategory){
 
   $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
-  User::verifyLogin();
 
   $category = new Category();
 
@@ -63,6 +63,17 @@ $app->get("/products/:desurl",function($desurl){
        'categories'=>$product->getCategories()
    ));
 
+});
+
+$app->get("/cart", function(){
+
+	$cart = Cart::getFromSession();
+
+	$page = new Page();
+
+	$page->setTpl('cart');
 })
+
+
 
 ?>

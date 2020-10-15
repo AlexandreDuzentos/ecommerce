@@ -11,7 +11,49 @@ class User extends Model {
 	const SESSION = "User";
 	const SECRET = "Hcodephp7_Secret";
   const SECRET2 = "Hcodephp7_Secret2";
+  
+  
+    /*
+2 - O método checkLogin() é usado junto com o verifyLogin(). Ele tem o objetivo de realizar a verificação se o usuário está logado por analisar suas informações e conferir se estão na sessão corrente
+  */
 
+  //verifica se há sessão e também seta e retorna os dados do usuário
+  public static function getFromSession()
+  {
+      if(isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['iduser'] > 0)  {
+
+        $user = new User();
+
+        $user->setData($_SESSION[User::SESSION]);
+      }
+      return $user;
+  }
+
+  public static function checkLogin($inadmin = true)
+  {
+     if(
+      !isset($_SESSION[User::SESSION])
+      ||
+      !$_SESSION[User::SESSION]
+      ||
+      !(int)$_SESSION[User::SESSION]["iduser"] > 0
+     ){
+      //Não logado
+       return false;
+
+     }else{
+
+       if ($inadmin == true && (bool)$_SESSION[User::SESSION]['inadmin'] === true){
+
+            return true;
+
+     }else if($inadmin === false){
+
+          return true; 
+     }
+  }
+}
+  
 	public static function login($login, $password)
 	{
 
@@ -50,16 +92,7 @@ class User extends Model {
 	public static function verifyLogin($inadmin = true)
 	{
 
-		if (
-			!isset($_SESSION[User::SESSION])
-			||
-			!$_SESSION[User::SESSION]
-			||
-			!(int)$_SESSION[User::SESSION]["iduser"] > 0
-			||
-			(bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin
-		) {
-
+		if(User::checkLogin($inadmin)){
 			header("Location:/admin/login");
 			exit;
 
