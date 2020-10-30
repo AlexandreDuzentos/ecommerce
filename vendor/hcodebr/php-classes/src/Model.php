@@ -20,7 +20,7 @@ class Model {
 			break;
 
 			case "set":
-				$this->values[$fieldName] = isset($args[0]) ? $args[0] : NULL; //OS valores passados como paramêtros nos setters são passados como argumento nesse metodo
+				$this->values[$fieldName] = isset($args[0]) ? $args[0] : NULL ; //OS valores passados como paramêtros nos setters são passados como argumento nesse metodo
 			break;
 
 		}
